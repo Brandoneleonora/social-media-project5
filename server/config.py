@@ -8,8 +8,6 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 
-# Local imports
-
 # Instantiate app, set attributes
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -20,9 +18,11 @@ app.json.compact = False
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
-db = SQLAlchemy(metadata=metadata)
-migrate = Migrate(app, db)
-db.init_app(app)
+
+db = SQLAlchemy(metadata=metadata)  # Initialize db
+db.init_app(app)  # Initialize db with app
+
+migrate = Migrate(app, db)  # Setup Migrate after db is initialized with app
 
 # Instantiate REST API
 api = Api(app)
