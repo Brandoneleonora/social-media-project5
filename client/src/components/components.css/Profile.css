@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.profile-container {
+    position: relative;
+    height: 600px;
+    width: 600px;
+    background: #787773;
+    margin: 5% auto;
+    border-radius: 10px;
+}
+
+.profile-box {
+    position:absolute;
+}
+
+.right-side h1,
+.left-side h1{
+    font-size: 1.5rem;
+    background: lightcoral;
+    margin-top: 40px;
+    width: 400px;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-left: 25%;
+    
+}
