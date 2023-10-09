@@ -28,3 +28,16 @@
     margin-left: 25%;
     
 }
+
+.profile-container button {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    bottom: 5px;
+    left: 240px;
+    border-radius: 10px;
+    background: #a6324d;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

@@ -27,7 +27,7 @@ class User(db.Model, SerializerMixin):
         return input
     #Relationship here
     posts = db.relationship('Posts', backref='user')
-
+    comments = db.relationship('Comments', backref='user')
 class Posts(db.Model, SerializerMixin):
     __tablename__ = 'posts'
 
@@ -39,6 +39,7 @@ class Posts(db.Model, SerializerMixin):
 
     #Relationship Here
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    comments = db.relationship('Comments', backref='post')
     
 class Comments(db.Model, SerializerMixin):
     __tablename__ = 'comments'
@@ -50,3 +51,5 @@ class Comments(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, server_default=db.func.now())
 
     #Relationships Here
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))

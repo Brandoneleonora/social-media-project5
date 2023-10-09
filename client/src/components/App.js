@@ -37,7 +37,10 @@ function App() {
     .then((response) => {
       if (response.ok) {
         response.json()
-        .then((user) => setUser(user.username));
+        .then((user) => {
+          setUser(user.username)
+          setLoggedIn(true)
+        });
       }
       else {
         navigate("/")

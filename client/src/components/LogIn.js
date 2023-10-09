@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./components.css/login.css"
 
 
@@ -53,6 +53,7 @@ function LogIn({ setUser, setLogIn }){
                     <input type="text" placeholder="Username..." value={username} onChange={e => setUsername(e.target.value)}/>
                     <input type="password" placeholder="Password..." value={password} onChange={e => setPassword(e.target.value)}/>
                     <button type='sumbit'>Log In</button>
+                    <Link to={"/"}>Create an account?</Link>
                 </form>
             </div>
         </div>

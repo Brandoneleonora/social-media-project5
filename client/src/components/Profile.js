@@ -11,9 +11,16 @@ function Profile({ user, setLoggedIn }){
         fetch(`profile/${user}`)
         .then(res => res.json())
         .then(profile => setProfile(profile))
-      }, [])
+      }, [user])
 
-    console.log(profile)
+    function handleLogout(){
+      fetch('/logout', {method: 'DELETE'})
+      .then(res => {
+        console.log(res)
+        setLoggedIn(false)
+      })
+      navigate('/')
+    }
   
     return (
         <div className="profile-container">
@@ -33,6 +40,7 @@ function Profile({ user, setLoggedIn }){
             </div>
           </div>
           }
+          <button onClick={() => handleLogout()}>Sign Out</button>
         </div>
     )
 }

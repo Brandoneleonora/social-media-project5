@@ -15,12 +15,6 @@ app.secret_key = b'\xd5e\xc5M\x9fS\x81~U\xa8x\xc2\xec@r\x84'
 
 # Views go here!
 
-@app.before_request
-def check_if_logged_in():
-    print("hi")
-    # if not session['user_id']:
-    #     return jsonify({'error': 'Unauthorized'}), 401
-
 @app.route('/signup', methods=['POST'])
 def signUp():
 
@@ -37,7 +31,7 @@ def signUp():
         db.session.add(new_user)
         db.session.commit()
 
-
+        session['user_id'] = new_user.id
         return jsonify(new_user.to_dict()), 200
 
 #This is to log in all it should do is validate the information from the users input
@@ -50,8 +44,7 @@ def logIn():
         else:
             return jsonify({"error" : "Incorrect Credentials"}), 403
         if user.username == log_in['username'] and bcrypt.check_password_hash(user.password, log_in['password']):
-            session.user_id = user.id
-            print(session.user_id)
+            session['user_id'] = user.id
             return (jsonify(user.to_dict()), 200)
         else:
             return jsonify({"error" : "Incorrect Credentials"}), 403
@@ -171,6 +164,11 @@ def single_posts(id):
         db.session.commit()
 
         return jsonify(post.to_dict()), 200
+
+@app.route('/logout', methods=['DELETE'])
+def logout():
+    session.clear()
+    return {}, 204
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
