@@ -28,6 +28,8 @@ class User(db.Model, SerializerMixin):
     #Relationship here
     posts = db.relationship('Posts', backref='user')
     comments = db.relationship('Comments', backref='user')
+    followers = db.relationship('Follower', backref='user')
+
 class Posts(db.Model, SerializerMixin):
     __tablename__ = 'posts'
 
@@ -53,3 +55,12 @@ class Comments(db.Model, SerializerMixin):
     #Relationships Here
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+
+
+class Follower(db.Model, SerializerMixin):
+    __tablename__= 'followers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
